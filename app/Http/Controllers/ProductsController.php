@@ -59,7 +59,8 @@ class ProductsController extends Controller {
 		$brands = new Brands ;
 		$types = new Types;
 		$record = $this->products->find($id);
-		return view('admin.record',['record' => $record, 'categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details  ]);
+		$path = url("/admin/{$this->details['route']}/{$record->{$this->details['pk']}}");
+		return view('admin.record',['record' => $record, 'categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details , 'path' => $path ]);
 	}
 
 	/**
@@ -69,7 +70,8 @@ class ProductsController extends Controller {
 		$categories = new Categories;
 		$brands = new Brands ;
 		$types = new Types;
-		return view('admin.record',['categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details ]);
+		$path = url("/admin/{$this->details['route']}/");
+		return view('admin.record',['categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details, 'path' => $path]);
 	}
 
 

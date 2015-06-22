@@ -22,14 +22,14 @@
 							@endforeach
 							<td>
 								@if($details['editable'])
-									<a href="{{url("/{$details['route']}/{$record->$details['pk']}/edit")}}">
+									<a href="{{url("/admin/{$details['route']}/{$record->$details['pk']}/edit")}}">
 										<button class="btn btn-default recordsInfo">
 											<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 										</button>
 									</a>
 								@endif
 								@if($details['deletable'])
-									<form style="display: inline;" action="{{url("/{$details['route']}/{$record->$details['pk']}")}}" method="POST" class="form-horizontal">
+									<form style="display: inline;" action="{{url("/admin/{$details['route']}/{$record->$details['pk']}")}}" method="POST" class="form-horizontal">
 										<input type="hidden" name="_method" value="DELETE"/>
 										<input type="hidden" name="_token" value="{{csrf_token()}}"/>
 										<button class="btn btn-default recordsInfo">
@@ -45,8 +45,8 @@
 				@endif
 				</tbody>
 			</table>
-			<a href="{{url("/{$details['route']}/create")}}">
-				<a class="btn btn-default">Novo Registo</a>
+			<a href="{{url("/admin/{$details['route']}/create")}}">
+				<button class="btn btn-default">Novo Registo</button>
 			</a>
 		</div>
 	</div>

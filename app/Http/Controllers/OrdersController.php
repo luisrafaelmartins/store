@@ -37,7 +37,7 @@ class OrdersController extends Controller {
 	public function index()
 	{
 		$orders = $this->orders
-			->select(\DB::raw(' name, concat(total, "€") as total, address, postal_code, phone, fax, shipemail, shipname, shipped, order_number, obs '))
+			->select(\DB::raw('id, name, concat(total, "€") as total, address, postal_code, phone, fax, shipemail, shipname, shipped, order_number, obs '))
 			->get();
 
 		return view('admin.home',['records' => $orders, 'details' => $this->details ]);
@@ -52,21 +52,17 @@ class OrdersController extends Controller {
 	 * @internal param Types $types
 	 */
 	public function edit($id){
-		$categories = new Categories;
-		$brands = new Brands ;
-		$types = new Types;
-		$record = $this->products->find($id);
-		return view('admin.record',['record' => $record, 'categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details  ]);
+		$record = $this->orders->find($id);
+		$path = url("/admin/{$this->details['route']}/{$record->{$this->details['pk']}}");
+		return view('admin.orders.details',['record' => $record, 'details' => $this->details , 'path' => $path ]);
 	}
 
 	/**
 	 * @return \Illuminate\View\View
      */
 	public function create(){
-		$categories = new Categories;
-		$brands = new Brands ;
-		$types = new Types;
-		return view('admin.record',['categories' => $categories->all(), 'brands' => $brands->all(), 'types' => $types->all(), 'details' => $this->details ]);
+		$path = url("/admin/{$this->details['route']}/");
+		return view('admin.orders.details',['details' => $this->details, 'path' => $path ]);
 	}
 
 
