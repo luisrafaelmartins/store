@@ -17,6 +17,7 @@ Route::get('home', 'HomeController@index');
 Route::get('admin', 'ProductsController@index');
 Route::resource('admin/products', 'ProductsController');
 Route::resource('admin/orders', 'OrdersController');
+Route::resource('admin/promotions', 'PromotionsController');
 
 Route::get('/', 'WelcomeController@index');
 

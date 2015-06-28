@@ -1,13 +1,19 @@
 <?php
 
 return [
+    'discount_type_list' => [
+        ['id' => 'Valor Fixo','name' => 'Valor Fixo'],
+        ['id' => 'Percentagem','name' => 'Percentagem'],
+    ],
     'orders' => [
         'pk' => 'id',
         'route' => 'orders',
         'title' => 'Encomendas',
         'deletable' => false,
         'editable' => true,
+        'create' => false,
         'list' => [
+            'id' => 'ID',
             'shipname' => 'Nome',
             'shipemail' => 'Email',
             'phone' => 'Telefone',
@@ -17,6 +23,12 @@ return [
             'order_number' => 'nª Factura',
         ],
         'fields' => [
+            'id' => [
+                'name' => 'id',
+                'designation' => 'id',
+                'type' => 'hidden',
+                'visible' => false,
+            ],
             'shipped' => [
                 'name' => 'shipped',
                 'designation' => 'Enviado',
@@ -55,6 +67,7 @@ return [
         'title' => 'Produtos',
         'deletable' => true,
         'editable' => true,
+        'create' => true,
         'list' => [
             'id' => 'ID',
             'name' => 'Nome',
@@ -62,6 +75,8 @@ return [
             'brand' => 'Marca',
             'category' => 'Categoria',
             'type' => 'Tipo',
+            'price' => 'Preço',
+            'price_tax' => 'IVA',
             'stock' => 'Stock',
             'available' => 'Disponível',
         ],
@@ -90,6 +105,7 @@ return [
                 'type' => 'dropdown',
                 'visible' => true,
                 'list' => 'brands',
+                'other' => true,
             ],
             'brand' => [
                 'name' => 'brand',
@@ -103,6 +119,7 @@ return [
                 'type' => 'dropdown',
                 'visible' => true,
                 'list' => 'categories',
+                'other' => true,
             ],
             'category' => [
                 'name' => 'category',
@@ -115,7 +132,8 @@ return [
                 'designation' => 'Tipo',
                 'type' => 'dropdown',
                 'visible' => true,
-                'list' => 'types'
+                'list' => 'types',
+                'other' => true,
             ],
             'type' => [
                 'name' => 'type',
@@ -127,6 +145,18 @@ return [
                 'name' => 'available',
                 'designation' => 'Disponível',
                 'type' => 'checkbox',
+                'visible' => true,
+            ],
+            'price' => [
+                'name' => 'price',
+                'designation' => 'Price',
+                'type' => 'input',
+                'visible' => true,
+            ],
+            'price_tax' => [
+                'name' => 'price_tax',
+                'designation' => 'IVA',
+                'type' => 'input',
                 'visible' => true,
             ],
             'stock' => [
@@ -141,6 +171,76 @@ return [
                 'type' => 'submit',
                 'visible' => true,
             ],
+        ]
+    ],
+
+    'promotions' => [
+        'pk' => 'id',
+        'route' => 'promotions',
+        'title' => 'Promoções',
+        'deletable' => true,
+        'editable' => true,
+        'create' => true,
+        'list' => [
+            'id' => 'ID',
+            'name' => 'Nome',
+            'designation' => 'Descrição',
+            'start_at' => 'Começo',
+            'end_at' => 'Término',
+            'discount' => 'Desconto',
+            'discount_type' => 'Tipo de Desconto',
+        ],
+        'fields' => [
+            'id' => [
+                'name' => 'id',
+                'designation' => 'ID',
+                'type' => 'hidden',
+                'visible' => false,
+            ],
+            'name' => [
+                'name' => 'name',
+                'designation' => 'Nome',
+                'type' => 'input',
+                'visible' => true,
+            ],
+            'designation' => [
+                'name' => 'designation',
+                'designation' => 'Descrição',
+                'type' => 'textarea',
+                'visible' => true,
+            ],
+            'start_at' => [
+                'name' => 'start_at',
+                'designation' => 'Começo',
+                'type' => 'input',
+                'visible' => true,
+            ],
+            'end_at' => [
+                'name' => 'end_at',
+                'designation' => 'Término',
+                'type' => 'input',
+                'visible' => true,
+            ],
+            'discount' => [
+                'name' => 'discount',
+                'designation' => 'Desconto',
+                'type' => 'input',
+                'visible' => true,
+            ],
+            'discount_type' => [
+                'name' => 'discount_type',
+                'designation' => 'Tipo de desconto',
+                'type' => 'dropdown',
+                'visible' => true,
+                'list' => 'discount_type',
+                'other' => false,
+            ],
+            /*'submit' => [
+                'name' => 'save',
+                'designation' => 'Guardar',
+                'type' => 'submit',
+                'visible' => true,
+            ],*/
         ]
     ],
 ];

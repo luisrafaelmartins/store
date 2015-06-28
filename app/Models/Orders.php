@@ -10,4 +10,7 @@ class Orders extends Model{
         'shipemail','shipped','shipped_at','order_number','obs'];
     use SoftDeletes;
 
+    public function details(){
+        return $this->hasMany('\App\Models\OrdersDetails','order_id');
+    }
 }

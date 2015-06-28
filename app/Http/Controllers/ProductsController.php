@@ -82,7 +82,7 @@ class ProductsController extends Controller {
 	public function store(Request $request){
 
 		$this->products = $this->storeValues($request, $this->products);
-		return redirect('products');
+		return redirect('admin/products');
 	}
 
 	/**
@@ -94,7 +94,7 @@ class ProductsController extends Controller {
 		$this->products = $this->products->find($request->input('id'));
 
 		$this->products = $this->storeValues($request, $this->products);
-		return redirect('products');
+		return redirect('admin/products');
 	}
 
 	/**
@@ -146,7 +146,7 @@ class ProductsController extends Controller {
 		$this->products = $this->products->find($id);
 		$this->products->delete();
 
-		return redirect('products');
+		return redirect('admin/products');
 	}
 
 }

@@ -28,12 +28,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="#">Impressão Tua</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/admin/products') }}">Produtos</a></li>
+					<li><a href="{{ url('/admin/orders') }}">Encomendas</a></li>
+					<li><a href="{{ url('/admin/promotions') }}">Promoções</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (\Auth::guest())
@@ -45,6 +47,7 @@
 
 							<ul class="dropdown-menu" role="menu">
 								@if (\Auth::user()->can("bo"))
+									<li><a href="{{ url('/') }}">Home</a></li>
 									<li><a href="{{ url('admin') }}">Administração</a></li>
 								@endif
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>

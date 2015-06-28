@@ -3,6 +3,7 @@
 
 use App\Models\Products;
 use App\Models\Orders;
+use App\Models\OrdersDetails;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller {
@@ -54,15 +55,7 @@ class OrdersController extends Controller {
 	public function edit($id){
 		$record = $this->orders->find($id);
 		$path = url("/admin/{$this->details['route']}/{$record->{$this->details['pk']}}");
-		return view('admin.orders.details',['record' => $record, 'details' => $this->details , 'path' => $path ]);
-	}
-
-	/**
-	 * @return \Illuminate\View\View
-     */
-	public function create(){
-		$path = url("/admin/{$this->details['route']}/");
-		return view('admin.orders.details',['details' => $this->details, 'path' => $path ]);
+		return view('admin.orders.details',['record' => $record, 'details' => $this->details , 'path' => $path]);
 	}
 
 
@@ -72,8 +65,8 @@ class OrdersController extends Controller {
      */
 	public function store(Request $request){
 
-		$this->products = $this->storeValues($request, $this->products);
-		return redirect('products');
+		$this->orders = $this->storeValues($request, $this->orders);
+		return redirect('admin/orders');
 	}
 
 	/**
@@ -81,11 +74,10 @@ class OrdersController extends Controller {
 	 * @return mixed
      */
 	public function update(Request $request){
+		$this->orders = $this->orders->find($request->input('id'));
+		$this->orders = $this->storeValues($request, $this->orders);
 
-		$this->products = $this->products->find($request->input('id'));
-
-		$this->products = $this->storeValues($request, $this->products);
-		return redirect('products');
+		return redirect('admin/orders');
 	}
 
 	/**
@@ -93,38 +85,14 @@ class OrdersController extends Controller {
 	 * @return Products
 	 */
 	public function storeValues(Request $request){
-		$this->products->name = $request->input('name');
-		$this->products->designation = $request->input('designation');
-		$this->products->thumb_path = $request->input('thumb_path');
-		$this->products->img_path = $request->input('img_path');
-		if ($request->input('category_id') == -1){
-			$category = new Categories;
-			$category->name =$request->input('category');
-			$category->save();
-			$this->products->category_id = $category->id;
-		}else{
-			$this->products->category_id = $request->input('category_id');
-		}
-		if ($request->input('brand_id') == -1){
-			$brand = new Brands();
-			$brand->name =$request->input('brand');
-			$brand->save();
-			$this->products->brand_id = $brand->id;
-		}else{
-			$this->products->brand_id = $request->input('brand_id');
-		}
-		if ($request->input('type_id') == -1){
-			$type = new Types();
-			$type->name =$request->input('type');
-			$type->save();
-			$this->products->type_id = $type->id;
-		}else{
-			$this->products->type_id = $request->input('type_id');
-		}
-		$this->products->available = $request->input('available');
-		$this->products->stock = $request->input('stock');
-		$this->products->save();
-		return $this->products;
+
+
+		$this->orders->shipped = $request->input('shipped');
+		$this->orders->shipname= $request->input('shipname');
+		$this->orders->shipemail= $request->input('shipemail');
+		$this->orders->phone = $request->input('phone');
+		$this->orders->save();
+		return $this->orders;
 
 	}
 
@@ -134,10 +102,10 @@ class OrdersController extends Controller {
 	 */
 	public function destroy($id){
 
-		$this->products = $this->products->find($id);
-		$this->products->delete();
+		$this->orders = $this->orders->find($id);
+		$this->orders->delete();
 
-		return redirect('products');
+		return redirect('orders');
 	}
 
 }

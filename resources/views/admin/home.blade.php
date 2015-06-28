@@ -22,7 +22,7 @@
 							@endforeach
 							<td>
 								@if($details['editable'])
-									<a href="{{url("/admin/{$details['route']}/{$record->$details['pk']}/edit")}}">
+									<a href="{{url("/admin/{$details['route']}/{$record->$details['pk']}/edit")}}" style="text-decoration: none;">
 										<button class="btn btn-default recordsInfo">
 											<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 										</button>
@@ -45,9 +45,11 @@
 				@endif
 				</tbody>
 			</table>
-			<a href="{{url("/admin/{$details['route']}/create")}}">
-				<button class="btn btn-default">Novo Registo</button>
-			</a>
+			@if($details['create'])
+				<a href="{{url("/admin/{$details['route']}/create")}}">
+					<button class="btn btn-default">Novo Registo</button>
+				</a>
+			@endif
 		</div>
 	</div>
 </div>

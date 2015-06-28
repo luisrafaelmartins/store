@@ -13,7 +13,7 @@
 							<input type="hidden" name="_method" value="PUT"/>
 						@endif
 						@foreach($details['fields'] as $kfield => $field)
-							@include("form.{$field['type']}",['name' => $field['name'],'designation' => $field['designation'],'visible' => $field['visible'],'value' => isset($record->{$field['name']}) ? $record->{$field['name']} : '', 'list' => isset($field['list']) ? ${$field['list']} : [] ])
+							@include("form.{$field['type']}",['name' => $field['name'],'designation' => $field['designation'],'visible' => $field['visible'],'value' => isset($record->{$field['name']}) ? $record->{$field['name']} : '', 'list' => isset($field['list']) ? ${$field['list']} : [] , 'other' => isset($field['other']) ? $field['other'] : false])
 						@endforeach
 					</form>
 				</div>
